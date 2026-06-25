@@ -4,12 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Running the Game
 
-No build step or dependencies. Open `index.html` directly in a browser, or serve it with any static file server:
+No build step or dependencies. Run the dev server for live reload on file save:
 
 ```bash
-python3 -m http.server 8080
+node serve.js
 # then open http://localhost:8080
 ```
+
+`serve.js` uses only Node.js built-ins — no install needed. It watches the project root and pushes a reload to the browser via SSE whenever any file changes.
 
 There are no tests or linting tools configured.
 
