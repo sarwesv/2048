@@ -120,8 +120,8 @@ button:hover {
   justify-content: center;
   border-radius: 4px;
   font-weight: 900;
-  transition: transform 0.1s ease, left 0.1s ease, top 0.1s ease;
-  will-change: transform, left, top;
+  transition: left 0.12s ease, top 0.12s ease;
+  will-change: left, top;
 }
 
 .tile.new {
