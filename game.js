@@ -250,27 +250,24 @@ document.addEventListener('keydown', e => {
 const gameGrid = document.querySelector('.grid-container');
 let touchStart = null;
 
+// non-passive so preventDefault() actually suppresses the browser scroll gesture
 gameGrid.addEventListener('touchstart', e => {
-  touchStart = e.touches[0];
-}, { passive: true });
+  e.preventDefault();
+  touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+}, { passive: false });
 
 gameGrid.addEventListener('touchmove', e => {
-  e.preventDefault(); // stop page scroll while swiping on the board
+  e.preventDefault();
 }, { passive: false });
 
 gameGrid.addEventListener('touchend', e => {
   if (!touchStart) return;
-  const dx = e.changedTouches[0].clientX - touchStart.clientX;
-  const dy = e.changedTouches[0].clientY - touchStart.clientY;
+  const dx = e.changedTouches[0].clientX - touchStart.x;
+  const dy = e.changedTouches[0].clientY - touchStart.y;
   touchStart = null;
   if (Math.max(Math.abs(dx), Math.abs(dy)) < 30) return;
   moveDir(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : (dy > 0 ? 'down' : 'up'));
-}, { passive: true });
-
-document.getElementById('btn-up').addEventListener('click',    () => moveDir('up'));
-document.getElementById('btn-down').addEventListener('click',  () => moveDir('down'));
-document.getElementById('btn-left').addEventListener('click',  () => moveDir('left'));
-document.getElementById('btn-right').addEventListener('click', () => moveDir('right'));
+});
 
 document.getElementById('new-game').addEventListener('click', init);
 document.getElementById('retry').addEventListener('click', init);

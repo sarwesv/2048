@@ -131,19 +131,20 @@ button:hover {
 }
 
 .tile.merged {
-  animation: pop 0.15s ease;
+  animation: pop 0.2s ease;
   z-index: 10;
 }
 
+/* Use standalone `scale` so it doesn't override `transform: translate()` used for position */
 @keyframes appear {
-  0%   { transform: scale(0); }
-  100% { transform: scale(1); }
+  0%   { scale: 0; }
+  100% { scale: 1; }
 }
 
 @keyframes pop {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.2); }
-  100% { transform: scale(1); }
+  0%   { scale: 1; }
+  50%  { scale: 1.15; }
+  100% { scale: 1; }
 }
 
 .tile-2    { background: #eee4da; color: #776e65; }
@@ -158,40 +159,6 @@ button:hover {
 .tile-1024 { background: #edc53f; color: #fff; }
 .tile-2048 { background: #edc22e; color: #fff; }
 .tile-super { background: #3c3a32; color: #fff; }
-
-.dpad {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  margin-top: 16px;
-}
-
-.dpad-row {
-  display: flex;
-  gap: 4px;
-}
-
-.dpad-btn {
-  width: 56px;
-  height: 56px;
-  font-size: 20px;
-  padding: 0;
-  border-radius: 10px;
-  background: #bbada0;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  touch-action: manipulation;
-  user-select: none;
-  -webkit-user-select: none;
-  transition: background 0.1s, transform 0.08s;
-}
-
-.dpad-btn:active {
-  background: #a09080;
-  transform: scale(0.93);
-}
 
 .instructions {
   margin-top: 12px;
