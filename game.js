@@ -242,16 +242,30 @@ document.addEventListener('keydown', e => {
   if (map[e.key]) { e.preventDefault(); moveDir(map[e.key]); }
 });
 
+const gameGrid = document.querySelector('.grid-container');
 let touchStart = null;
-document.addEventListener('touchstart', e => { touchStart = e.touches[0]; }, { passive: true });
-document.addEventListener('touchend', e => {
+
+gameGrid.addEventListener('touchstart', e => {
+  touchStart = e.touches[0];
+}, { passive: true });
+
+gameGrid.addEventListener('touchmove', e => {
+  e.preventDefault(); // stop page scroll while swiping on the board
+}, { passive: false });
+
+gameGrid.addEventListener('touchend', e => {
   if (!touchStart) return;
   const dx = e.changedTouches[0].clientX - touchStart.clientX;
   const dy = e.changedTouches[0].clientY - touchStart.clientY;
-  if (Math.max(Math.abs(dx), Math.abs(dy)) < 20) return;
-  moveDir(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : (dy > 0 ? 'down' : 'up'));
   touchStart = null;
+  if (Math.max(Math.abs(dx), Math.abs(dy)) < 30) return;
+  moveDir(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : (dy > 0 ? 'down' : 'up'));
 }, { passive: true });
+
+document.getElementById('btn-up').addEventListener('click',    () => moveDir('up'));
+document.getElementById('btn-down').addEventListener('click',  () => moveDir('down'));
+document.getElementById('btn-left').addEventListener('click',  () => moveDir('left'));
+document.getElementById('btn-right').addEventListener('click', () => moveDir('right'));
 
 document.getElementById('new-game').addEventListener('click', init);
 document.getElementById('retry').addEventListener('click', init);
