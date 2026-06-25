@@ -27,13 +27,21 @@ function fontSize(val, size) {
 
 // ── tile DOM ───────────────────────────────────────────────────────────────────
 
+function setTransform(el, r, c, size) {
+  const { left, top } = px(r, c, size);
+  el.style.transform = `translate(${left}px,${top}px)`;
+}
+
 function makeTileEl(tile, size) {
-  const { left, top } = px(tile.row, tile.col, size);
   const el = document.createElement('div');
   el.className = `tile tile-${tile.value <= 2048 ? tile.value : 'super'}`;
   el.dataset.id = tile.id;
   el.textContent = tile.value;
-  el.style.cssText = `width:${size}px;height:${size}px;font-size:${fontSize(tile.value, size)}px;left:${left}px;top:${top}px`;
+  el.style.width     = `${size}px`;
+  el.style.height    = `${size}px`;
+  el.style.fontSize  = `${fontSize(tile.value, size)}px`;
+  // set position without triggering transition (element not in DOM yet)
+  setTransform(el, tile.row, tile.col, size);
   return el;
 }
 
@@ -46,12 +54,13 @@ function repositionAll() {
   tiles.forEach(t => {
     const el = getTileEl(t.id);
     if (!el) return;
-    const { left, top } = px(t.row, t.col, size);
-    el.style.width  = `${size}px`;
-    el.style.height = `${size}px`;
-    el.style.fontSize = `${fontSize(t.value, size)}px`;
-    el.style.left = `${left}px`;
-    el.style.top  = `${top}px`;
+    el.style.transition = 'none'; // skip animation on resize
+    el.style.width      = `${size}px`;
+    el.style.height     = `${size}px`;
+    el.style.fontSize   = `${fontSize(t.value, size)}px`;
+    setTransform(el, t.row, t.col, size);
+    // re-enable transition after paint
+    requestAnimationFrame(() => { el.style.transition = ''; });
   });
 }
 
@@ -190,13 +199,11 @@ function moveDir(dir) {
   animating = true;
   const size = cellSize();
 
-  // kick off CSS transitions
+  // kick off GPU-accelerated transitions
   allSlides.forEach(({ tileId, toRow, toCol }) => {
     const el = getTileEl(tileId);
     if (!el) return;
-    const { left, top } = px(toRow, toCol, size);
-    el.style.left = `${left}px`;
-    el.style.top  = `${top}px`;
+    setTransform(el, toRow, toCol, size);
     const t = tiles.find(t => t.id === tileId);
     t.row = toRow; t.col = toCol;
   });
@@ -205,10 +212,8 @@ function moveDir(dir) {
     [id1, id2].forEach(id => {
       const el = getTileEl(id);
       if (!el) return;
-      const { left, top } = px(toRow, toCol, size);
       el.style.zIndex = '5';
-      el.style.left = `${left}px`;
-      el.style.top  = `${top}px`;
+      setTransform(el, toRow, toCol, size);
     });
   });
 

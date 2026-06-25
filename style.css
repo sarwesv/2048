@@ -115,13 +115,15 @@ button:hover {
 
 .tile {
   position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 4px;
   font-weight: 900;
-  transition: left 0.12s ease, top 0.12s ease;
-  will-change: left, top;
+  transition: transform 0.12s ease;
+  will-change: transform;
 }
 
 .tile.new {
