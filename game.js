@@ -279,4 +279,4 @@ document.getElementById('retry').addEventListener('click', init);
 window.addEventListener('resize', repositionAll);
 
 
-init();
+window.addEventListener('load', init);
