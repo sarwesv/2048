@@ -4,14 +4,49 @@
   padding: 0;
 }
 
+/* ── dark neon (default) ───────────────────────────────────────────────────── */
+:root {
+  --bg:           #0d0d1a;
+  --grid-bg:      #12122a;
+  --cell-bg:      rgba(255,255,255,0.04);
+  --title:        #e0e0ff;
+  --score-bg:     #1c1c3a;
+  --score-label:  #6868aa;
+  --score-value:  #e0e0ff;
+  --text:         #7070aa;
+  --btn-bg:       #2a2a55;
+  --btn-hover:    #3a3a70;
+  --overlay-bg:   rgba(10,10,26,0.88);
+  --overlay-card: #12122a;
+  --overlay-text: #e0e0ff;
+}
+
+/* ── light classic ─────────────────────────────────────────────────────────── */
+body.light {
+  --bg:           #faf8ef;
+  --grid-bg:      #bbada0;
+  --cell-bg:      rgba(238,228,218,0.35);
+  --title:        #776e65;
+  --score-bg:     #bbada0;
+  --score-label:  #eee4da;
+  --score-value:  #fff;
+  --text:         #776e65;
+  --btn-bg:       #8f7a66;
+  --btn-hover:    #7a6856;
+  --overlay-bg:   rgba(250,248,239,0.85);
+  --overlay-card: #bbada0;
+  --overlay-text: #fff;
+}
+
 body {
-  background: #faf8ef;
+  background: var(--bg);
   font-family: 'Arial', sans-serif;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
   padding: 20px;
+  transition: background 0.3s;
 }
 
 .container {
@@ -19,6 +54,7 @@ body {
   max-width: 500px;
 }
 
+/* ── header ────────────────────────────────────────────────────────────────── */
 .header {
   display: flex;
   justify-content: space-between;
@@ -29,7 +65,8 @@ body {
 h1 {
   font-size: 72px;
   font-weight: 900;
-  color: #776e65;
+  color: var(--title);
+  transition: color 0.3s;
 }
 
 .scores {
@@ -38,53 +75,60 @@ h1 {
 }
 
 .score-box {
-  background: #bbada0;
-  color: #fff;
+  background: var(--score-bg);
   border-radius: 6px;
   padding: 8px 16px;
   text-align: center;
   min-width: 70px;
+  transition: background 0.3s;
 }
 
 .score-label {
   display: block;
   font-size: 11px;
   font-weight: 700;
-  color: #eee4da;
+  color: var(--score-label);
+  transition: color 0.3s;
 }
 
 .score-box span:last-child {
   font-size: 22px;
   font-weight: 700;
+  color: var(--score-value);
+  transition: color 0.3s;
 }
 
+/* ── controls ──────────────────────────────────────────────────────────────── */
 .controls {
   display: flex;
   justify-content: flex-end;
+  gap: 8px;
   margin-bottom: 16px;
 }
 
 button {
-  background: #8f7a66;
-  color: #fff;
+  background: var(--btn-bg);
+  color: var(--score-value);
   border: none;
   border-radius: 6px;
   padding: 10px 20px;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.15s, color 0.3s;
 }
 
 button:hover {
-  background: #7a6856;
+  background: var(--btn-hover);
 }
 
+/* ── grid ──────────────────────────────────────────────────────────────────── */
 .grid-container {
   position: relative;
-  background: #bbada0;
-  border-radius: 8px;
+  background: var(--grid-bg);
+  border-radius: 12px;
   padding: 12px;
+  transition: background 0.3s;
 }
 
 .grid-background {
@@ -101,8 +145,9 @@ button:hover {
 .cell {
   flex: 1;
   aspect-ratio: 1;
-  background: rgba(238, 228, 218, 0.35);
+  background: var(--cell-bg);
   border-radius: 12px;
+  transition: background 0.3s;
 }
 
 .tile-container {
@@ -113,6 +158,7 @@ button:hover {
   bottom: 12px;
 }
 
+/* ── tiles ─────────────────────────────────────────────────────────────────── */
 .tile {
   position: absolute;
   top: 0;
@@ -126,79 +172,81 @@ button:hover {
   will-change: transform;
 }
 
-.tile.new {
-  animation: appear 0.15s ease;
-}
+.tile.new    { animation: appear 0.15s ease; }
+.tile.merged { animation: pop 0.2s ease; z-index: 10; }
 
-.tile.merged {
-  animation: pop 0.2s ease;
-  z-index: 10;
-}
-
-/* Use standalone `scale` so it doesn't override `transform: translate()` used for position */
 @keyframes appear {
   0%   { scale: 0; }
   100% { scale: 1; }
 }
-
 @keyframes pop {
   0%   { scale: 1; }
   50%  { scale: 1.15; }
   100% { scale: 1; }
 }
 
-.tile-2    { background: #eee4da; color: #776e65; }
-.tile-4    { background: #ede0c8; color: #776e65; }
-.tile-8    { background: #f2b179; color: #fff; }
-.tile-16   { background: #f59563; color: #fff; }
-.tile-32   { background: #f67c5f; color: #fff; }
-.tile-64   { background: #f65e3b; color: #fff; }
-.tile-128  { background: #edcf72; color: #fff; }
-.tile-256  { background: #edcc61; color: #fff; }
-.tile-512  { background: #edc850; color: #fff; }
-.tile-1024 { background: #edc53f; color: #fff; }
-.tile-2048 { background: #edc22e; color: #fff; }
-.tile-super { background: #3c3a32; color: #fff; }
+/* dark neon tile colours */
+.tile-2    { background: #0d1f2d; color: #00e5ff; border: 2px solid #00e5ff; box-shadow: 0 0 8px #00e5ff, 0 0 20px rgba(0,229,255,.25); }
+.tile-4    { background: #0d1f18; color: #00ff88; border: 2px solid #00ff88; box-shadow: 0 0 8px #00ff88, 0 0 20px rgba(0,255,136,.25); }
+.tile-8    { background: #1f1d00; color: #ffe600; border: 2px solid #ffe600; box-shadow: 0 0 8px #ffe600, 0 0 20px rgba(255,230,0,.25); }
+.tile-16   { background: #1f1000; color: #ff9500; border: 2px solid #ff9500; box-shadow: 0 0 8px #ff9500, 0 0 20px rgba(255,149,0,.25); }
+.tile-32   { background: #1f0010; color: #ff2d78; border: 2px solid #ff2d78; box-shadow: 0 0 8px #ff2d78, 0 0 20px rgba(255,45,120,.25); }
+.tile-64   { background: #14001f; color: #bf00ff; border: 2px solid #bf00ff; box-shadow: 0 0 8px #bf00ff, 0 0 20px rgba(191,0,255,.25); }
+.tile-128  { background: #00081f; color: #0066ff; border: 2px solid #0066ff; box-shadow: 0 0 8px #0066ff, 0 0 24px rgba(0,102,255,.3); }
+.tile-256  { background: #001f1a; color: #00ffcc; border: 2px solid #00ffcc; box-shadow: 0 0 8px #00ffcc, 0 0 24px rgba(0,255,204,.3); }
+.tile-512  { background: #1f0400; color: #ff4500; border: 2px solid #ff4500; box-shadow: 0 0 8px #ff4500, 0 0 24px rgba(255,69,0,.3); }
+.tile-1024 { background: #0d1f00; color: #66ff00; border: 2px solid #66ff00; box-shadow: 0 0 10px #66ff00, 0 0 28px rgba(102,255,0,.35); }
+.tile-2048 { background: #1f1900; color: #ffd700; border: 2px solid #ffd700; box-shadow: 0 0 12px #ffd700, 0 0 32px rgba(255,215,0,.45); }
+.tile-super { background: #111; color: #fff; border: 2px solid #fff; box-shadow: 0 0 12px #fff, 0 0 28px rgba(255,255,255,.3); }
 
+/* light classic tile colours */
+body.light .tile { border: none; box-shadow: none; }
+body.light .tile-2    { background: #eee4da; color: #776e65; }
+body.light .tile-4    { background: #ede0c8; color: #776e65; }
+body.light .tile-8    { background: #f2b179; color: #fff; }
+body.light .tile-16   { background: #f59563; color: #fff; }
+body.light .tile-32   { background: #f67c5f; color: #fff; }
+body.light .tile-64   { background: #f65e3b; color: #fff; }
+body.light .tile-128  { background: #edcf72; color: #fff; }
+body.light .tile-256  { background: #edcc61; color: #fff; }
+body.light .tile-512  { background: #edc850; color: #fff; }
+body.light .tile-1024 { background: #edc53f; color: #fff; }
+body.light .tile-2048 { background: #edc22e; color: #fff; }
+body.light .tile-super { background: #3c3a32; color: #fff; }
+
+/* ── misc ──────────────────────────────────────────────────────────────────── */
 .instructions {
   margin-top: 12px;
-  color: #776e65;
+  color: var(--text);
   font-size: 14px;
   text-align: center;
+  transition: color 0.3s;
 }
 
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(250, 248, 239, 0.75);
+  background: var(--overlay-bg);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 100;
+  transition: background 0.3s;
 }
 
-.overlay.hidden {
-  display: none;
-}
+.overlay.hidden { display: none; }
 
 .overlay-content {
-  background: #bbada0;
-  border-radius: 10px;
+  background: var(--overlay-card);
+  border-radius: 12px;
   padding: 40px 60px;
   text-align: center;
-  color: #fff;
+  color: var(--overlay-text);
+  transition: background 0.3s, color 0.3s;
 }
 
-.overlay-content h2 {
-  font-size: 48px;
-  font-weight: 900;
-  margin-bottom: 8px;
-}
-
-.overlay-content p {
-  font-size: 18px;
-  margin-bottom: 20px;
-}
+.overlay-content h2 { font-size: 48px; font-weight: 900; margin-bottom: 8px; }
+.overlay-content p  { font-size: 18px; margin-bottom: 20px; }
 
 @media (max-width: 520px) {
   h1 { font-size: 48px; }
