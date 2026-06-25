@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2048</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>2048</h1>
+      <div class="scores">
+        <div class="score-box">
+          <span class="score-label">SCORE</span>
+          <span id="score">0</span>
+        </div>
+        <div class="score-box">
+          <span class="score-label">BEST</span>
+          <span id="best">0</span>
+        </div>
+      </div>
+    </div>
+    <div class="controls">
+      <button id="new-game">New Game</button>
+    </div>
+    <div class="grid-container">
+      <div class="grid-background">
+        <div class="grid-row"><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div></div>
+        <div class="grid-row"><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div></div>
+        <div class="grid-row"><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div></div>
+        <div class="grid-row"><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div></div>
+      </div>
+      <div class="tile-container" id="tile-container"></div>
+    </div>
+    <p class="instructions">Use <strong>arrow keys</strong> or swipe to move tiles. Combine matching numbers to reach <strong>2048!</strong></p>
+  </div>
+  <div id="game-over" class="overlay hidden">
+    <div class="overlay-content">
+      <h2 id="overlay-title">Game Over!</h2>
+      <p id="overlay-score"></p>
+      <button id="retry">Try Again</button>
+    </div>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
