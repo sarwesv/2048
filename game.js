@@ -92,8 +92,13 @@ function spawnRandom(animate) {
   const tile = { id: nextId++, value: Math.random() < 0.9 ? 2 : 4, row: r, col: c };
   tiles.push(tile);
   const el = makeTileEl(tile, cellSize());
-  if (animate) el.classList.add('new');
+  el.style.transition = 'none'; // block the transform transition while placing
   tileContainer.appendChild(el);
+  if (animate) {
+    void el.offsetWidth; // force reflow so 'transition:none' is committed
+    el.style.transition = '';
+    el.classList.add('new');
+  }
 }
 
 function updateScore() {
