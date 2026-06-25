@@ -278,13 +278,5 @@ document.getElementById('new-game').addEventListener('click', init);
 document.getElementById('retry').addEventListener('click', init);
 window.addEventListener('resize', repositionAll);
 
-const themeBtn = document.getElementById('theme-toggle');
-function applyTheme(light) {
-  document.body.classList.toggle('light', light);
-  themeBtn.textContent = light ? 'Dark' : 'Light';
-  localStorage.setItem('2048-theme', light ? 'light' : 'dark');
-}
-themeBtn.addEventListener('click', () => applyTheme(!document.body.classList.contains('light')));
-applyTheme(localStorage.getItem('2048-theme') === 'light');
 
 init();

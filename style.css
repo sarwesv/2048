@@ -21,22 +21,6 @@
   --overlay-text: #e0e0ff;
 }
 
-/* ── light classic ─────────────────────────────────────────────────────────── */
-body.light {
-  --bg:           #faf8ef;
-  --grid-bg:      #bbada0;
-  --cell-bg:      rgba(238,228,218,0.35);
-  --title:        #776e65;
-  --score-bg:     #bbada0;
-  --score-label:  #eee4da;
-  --score-value:  #fff;
-  --text:         #776e65;
-  --btn-bg:       #8f7a66;
-  --btn-hover:    #7a6856;
-  --overlay-bg:   rgba(250,248,239,0.85);
-  --overlay-card: #bbada0;
-  --overlay-text: #fff;
-}
 
 body {
   background: var(--bg);
@@ -199,20 +183,6 @@ button:hover {
 .tile-2048 { background: #1f1900; color: #ffd700; border: 2px solid #ffd700; box-shadow: 0 0 12px #ffd700, 0 0 32px rgba(255,215,0,.45); }
 .tile-super { background: #111; color: #fff; border: 2px solid #fff; box-shadow: 0 0 12px #fff, 0 0 28px rgba(255,255,255,.3); }
 
-/* light classic tile colours */
-body.light .tile { border: none; box-shadow: none; }
-body.light .tile-2    { background: #eee4da; color: #776e65; }
-body.light .tile-4    { background: #ede0c8; color: #776e65; }
-body.light .tile-8    { background: #f2b179; color: #fff; }
-body.light .tile-16   { background: #f59563; color: #fff; }
-body.light .tile-32   { background: #f67c5f; color: #fff; }
-body.light .tile-64   { background: #f65e3b; color: #fff; }
-body.light .tile-128  { background: #edcf72; color: #fff; }
-body.light .tile-256  { background: #edcc61; color: #fff; }
-body.light .tile-512  { background: #edc850; color: #fff; }
-body.light .tile-1024 { background: #edc53f; color: #fff; }
-body.light .tile-2048 { background: #edc22e; color: #fff; }
-body.light .tile-super { background: #3c3a32; color: #fff; }
 
 /* ── misc ──────────────────────────────────────────────────────────────────── */
 .instructions {
