@@ -102,7 +102,7 @@ button:hover {
   flex: 1;
   aspect-ratio: 1;
   background: rgba(238, 228, 218, 0.35);
-  border-radius: 4px;
+  border-radius: 12px;
 }
 
 .tile-container {
@@ -120,7 +120,7 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: 12px;
   font-weight: 900;
   transition: transform 0.12s ease;
   will-change: transform;
@@ -202,6 +202,4 @@ button:hover {
 
 @media (max-width: 520px) {
   h1 { font-size: 48px; }
-  .cell { border-radius: 3px; }
-  .tile { border-radius: 3px; }
 }
