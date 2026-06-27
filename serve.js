@@ -11,6 +11,8 @@ const MIME = {
   '.html': 'text/html',
   '.css':  'text/css',
   '.js':   'application/javascript',
+  '.json': 'application/json',
+  '.svg':  'image/svg+xml',
 };
 
 // SSE clients waiting for reload signals

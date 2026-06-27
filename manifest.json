@@ -1,0 +1,17 @@
+{
+  "name": "2048",
+  "short_name": "2048",
+  "description": "The classic 2048 sliding tile game",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0d1a",
+  "theme_color": "#0d0d1a",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
