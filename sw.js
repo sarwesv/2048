@@ -1,6 +1,6 @@
-const VERSION = 'v1';
+const VERSION = 'v2';
 const CACHE   = `2048-${VERSION}`;
-const ASSETS  = ['/', '/index.html', '/game.js', '/style.css', '/favicon.svg', '/manifest.json'];
+const ASSETS  = ['./', './index.html', './game.js', './style.css', './favicon.svg', './manifest.json'];
 
 self.addEventListener('install', e => {
   e.waitUntil(
